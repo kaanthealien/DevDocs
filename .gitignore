@@ -1,0 +1,4 @@
+.env
+__pycache__
+ai-env
+test_ai.py
