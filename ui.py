@@ -9,7 +9,7 @@ st.markdown("Azure AI & RAG mimarisi ile güçlendirilmiş teknik asistan.")
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Chat geçmişini ekranda tut
+# Chati ekranda tutmak için 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
