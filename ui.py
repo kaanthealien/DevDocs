@@ -14,7 +14,6 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Kullanıcıdan soru al
 if prompt := st.chat_input("Neyi Merak Ediyorsun ?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
@@ -22,7 +21,6 @@ if prompt := st.chat_input("Neyi Merak Ediyorsun ?"):
 
     with st.chat_message("assistant"):
         with st.spinner("Dokümanlar taranıyor..."):
-            # Senin yazdığın o güçlü RAG fonksiyonunu çalıştırıyoruz
             response = asistan_cevapla(prompt) 
             st.markdown(response)
             

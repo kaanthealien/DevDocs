@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# 1. Bağlantı Ayarları
 search_client = SearchClient(
     os.getenv("AZURE_SEARCH_ENDPOINT"), 
     os.getenv("AZURE_SEARCH_INDEX_NAME"), 
@@ -28,7 +27,7 @@ def asistan_cevapla(soru):
         model=os.getenv("AZURE_OPENAI_EMBEDDING_NAME")
     ).data[0].embedding
 
-    # B - Azure AI Search'te en yakın veriyi bul (Vektör Arama)
+    # B - Azure AI Search'te en yakın veriyi bulma
     vector_query = VectorizedQuery(vector=embedding, k_nearest_neighbors=3, fields="content_vector")
     
     search_results = search_client.search(

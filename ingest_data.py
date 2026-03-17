@@ -21,11 +21,10 @@ index_name = os.getenv("AZURE_SEARCH_INDEX_NAME")
 client = AzureOpenAI(api_key=api_key, api_version="2024-02-01", azure_endpoint=endpoint)
 search_index_client = SearchIndexClient(search_endpoint, AzureKeyCredential(search_key))
 
-# --- 1. INDEX OLUŞTURMA (Vektör Destekli Tablo Yapısı) ---
+# İndex oluştur
 fields = [
     SimpleField(name="id", type=SearchFieldDataType.String, key=True),
     SearchableField(name="content", type=SearchFieldDataType.String),
-    # Vektör alanı: 1536 boyutlu (text-embedding-3-small standardı)
     SearchField(name="content_vector", type=SearchFieldDataType.Collection(SearchFieldDataType.Single), 
                 vector_search_dimensions=1536, vector_search_profile_name="myHnswProfile")
 ]
@@ -39,7 +38,7 @@ index = SearchIndex(name=index_name, fields=fields, vector_search=vector_search)
 search_index_client.create_or_update_index(index)
 print(f"Index {index_name} oluşturuldu.")
 
-# --- 2. VERİYİ VEKTÖRE ÇEVİRİP YÜKLEME ---
+# Veriyi vektöre çevir
 text_to_upload = "Azure DevOps üzerinde CI/CD pipeline'ları YAML dosyaları ile tanımlanır."
 
 # Metni vektöre çevir
@@ -49,7 +48,7 @@ embedding_response = client.embeddings.create(
 )
 vector = embedding_response.data[0].embedding
 
-# Azure AI Search'e gönder
+# Azure AI Search'e gönderme
 search_client = SearchClient(search_endpoint, index_name, AzureKeyCredential(search_key))
 search_client.upload_documents(documents=[{
     "id": "1",
