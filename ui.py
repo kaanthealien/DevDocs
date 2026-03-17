@@ -1,5 +1,5 @@
 import streamlit as st
-from app import asistan_cevapla # app.py'daki fonksiyonu çağırıyoruz
+from app import asistan_cevapla 
 
 st.set_page_config(page_title="DevOps AI Assistant", page_icon="🤖")
 
