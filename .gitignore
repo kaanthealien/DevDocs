@@ -2,3 +2,4 @@
 __pycache__
 ai-env
 test_ai.py
+.DS_Store
